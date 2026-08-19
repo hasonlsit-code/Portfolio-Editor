@@ -8,7 +8,7 @@ import {
   Menu,
   X,
 } from 'lucide-react'
-import { GithubIcon, LinkedinIcon, InstagramIcon, YoutubeIcon } from './SocialIcons'
+import { FacebookIcon, InstagramIcon } from './SocialIcons'
 import { navLinks, profile } from '../data/content'
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -123,17 +123,11 @@ export default function Sidebar() {
         <div>
           <p className="text-sm font-semibold text-[var(--text)] mb-4">Kết nối với tôi</p>
           <div id="social" className="flex items-center gap-3 mb-3">
-            <a href={profile.social.github} target="_blank" rel="noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--bg-soft)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
-              <GithubIcon size={16} />
-            </a>
-            <a href={profile.social.linkedin} target="_blank" rel="noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--bg-soft)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
-              <LinkedinIcon size={16} />
+            <a href={profile.social.facebook} target="_blank" rel="noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--bg-soft)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
+              <FacebookIcon size={16} />
             </a>
             <a href={profile.social.instagram} target="_blank" rel="noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--bg-soft)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
               <InstagramIcon size={16} />
-            </a>
-            <a href={profile.social.youtube} target="_blank" rel="noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--bg-soft)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
-              <YoutubeIcon size={16} />
             </a>
           </div>
           <a

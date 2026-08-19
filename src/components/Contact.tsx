@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
-import { GithubIcon, LinkedinIcon, InstagramIcon, YoutubeIcon } from './SocialIcons'
+import { FacebookIcon, InstagramIcon } from './SocialIcons'
 import { profile } from '../data/content'
 import Reveal from './Reveal'
 
@@ -50,17 +50,11 @@ export default function Contact() {
             </div>
           </div>
           <div className="flex items-center gap-3 pt-2">
-            <a href={profile.social.github} target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:-translate-y-1 transition-all">
-              <GithubIcon size={16} />
-            </a>
-            <a href={profile.social.linkedin} target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:-translate-y-1 transition-all">
-              <LinkedinIcon size={16} />
+            <a href={profile.social.facebook} target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:-translate-y-1 transition-all">
+              <FacebookIcon size={16} />
             </a>
             <a href={profile.social.instagram} target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:-translate-y-1 transition-all">
               <InstagramIcon size={16} />
-            </a>
-            <a href={profile.social.youtube} target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:-translate-y-1 transition-all">
-              <YoutubeIcon size={16} />
             </a>
           </div>
         </Reveal>

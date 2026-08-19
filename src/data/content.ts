@@ -8,9 +8,9 @@ export const profile = {
   aboutShort:
     'Đam mê sáng tạo và nghệ thuật hình ảnh. Tôi thích biến những ý tưởng thành những thước phim thực tế và đáng nhớ.',
   aboutLong:
-    "Tôi là một Video Editor tại Việt Nam. Trong những năm qua, tôi đã tham gia dựng nhiều thể loại video từ du lịch, sự kiện đến video thương hiệu đậm chất điện ảnh. Tôi chú trọng vào lối kể chuyện mạch lạc, nhịp độ cắt cảnh mượt mà và nghệ thuật chỉnh màu để làm cho khán giả thực sự cảm nhận được thông điệp qua từng khung hình.",
+    "Tôi là một Video Editor và Content Creator tại Việt Nam. Không chỉ đảm nhận vai trò hậu kỳ, tôi còn có khả năng tự lên ý tưởng, viết kịch bản và trực tiếp quay dựng video. Trong quá trình làm việc, tôi chủ yếu sử dụng CapCut để edit các video với nhịp độ cuốn hút và kết hợp với Canva để thiết kế các ấn phẩm hình ảnh đẹp mắt.",
   aboutIntro:
-    "Tôi là Nguyễn Thái Sơn, một Video Editor đam mê sáng tạo nội dung, kể những câu chuyện qua video và mang lại cảm xúc cho người xem.",
+    "Tôi là Hà Thái Sơn, một người đam mê sáng tạo nội dung, lên kịch bản, quay phim và dựng video để mang lại cảm xúc cho người xem.",
   quote:
     'Mỗi khung hình tôi dựng, mỗi dải màu tôi chỉnh đều là một bước tiến gần hơn tới việc tạo ra một tác phẩm nghệ thuật.',
   email: 'hason.ls.it@gmail.com',
@@ -18,10 +18,8 @@ export const profile = {
   phone: '098 4614 762',
   cvUrl: '#',
   social: {
-    github: 'https://github.com/',
-    linkedin: 'https://linkedin.com/',
+    facebook: 'https://facebook.com/',
     instagram: 'https://instagram.com/',
-    youtube: 'https://youtube.com/',
   },
 }
 
@@ -36,23 +34,23 @@ export const navLinks = [
 export const whatIDo = [
   {
     icon: 'clapperboard',
-    title: 'Video Editing',
-    description: 'Premiere Pro, Cắt dựng nhịp nhàng, Storytelling',
-  },
-  {
-    icon: 'aperture',
-    title: 'Color Grading',
-    description: 'Davinci Resolve, Chỉnh màu điện ảnh, Look creation',
+    title: 'Kịch bản & Quay dựng',
+    description: 'Lên ý tưởng, viết kịch bản chi tiết và trực tiếp quay dựng video',
   },
   {
     icon: 'film',
-    title: 'Motion Graphics',
-    description: 'After Effects, Hiệu ứng chữ, Hoạt ảnh 2D',
+    title: 'Video Editing',
+    description: 'Cắt dựng nhịp nhàng, thêm hiệu ứng bắt mắt với CapCut',
+  },
+  {
+    icon: 'aperture',
+    title: 'Thiết kế Hình ảnh',
+    description: 'Thiết kế thumbnail, banner và ấn phẩm truyền thông bằng Canva',
   },
   {
     icon: 'mic',
-    title: 'Sound Design',
-    description: 'Audition, Lồng tiếng, Thiết kế âm thanh',
+    title: 'Âm thanh & Voice',
+    description: 'Thu âm, lồng tiếng và lựa chọn âm nhạc phù hợp với mạch cảm xúc',
   },
 ]
 
@@ -91,29 +89,28 @@ export const whatIDoTabs = [
     id: 'video-editing',
     label: 'Dựng Video',
     tools: [
-      { name: 'Premiere Pro', icon: 'premiere', color: 'text-purple-400', bg: 'bg-purple-400/10' },
       { name: 'CapCut', icon: 'capcut', color: 'text-slate-200', bg: 'bg-slate-400/10' },
-      { name: 'Storytelling', icon: 'story', color: 'text-violet-400', bg: 'bg-violet-400/10' },
+      { name: 'Premiere Pro', icon: 'premiere', color: 'text-purple-400', bg: 'bg-purple-400/10' },
       { name: 'Hiệu ứng chuyển cảnh', icon: 'transition', color: 'text-indigo-400', bg: 'bg-indigo-400/10' },
+      { name: 'Tìm nhạc (BGM)', icon: 'audio', color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
     ],
   },
   {
-    id: 'color-grading',
-    label: 'Chỉnh màu',
+    id: 'script-shoot',
+    label: 'Kịch bản & Quay',
     tools: [
-      { name: 'DaVinci Resolve', icon: 'davinci', color: 'text-rose-400', bg: 'bg-rose-400/10' },
-      { name: 'Lumetri Color', icon: 'color', color: 'text-amber-400', bg: 'bg-amber-400/10' },
-      { name: 'Color Matching', icon: 'palette', color: 'text-orange-400', bg: 'bg-orange-400/10' },
+      { name: 'Lên Kịch Bản', icon: 'story', color: 'text-violet-400', bg: 'bg-violet-400/10' },
+      { name: 'Quay Phim', icon: 'camera', color: 'text-rose-400', bg: 'bg-rose-400/10' },
+      { name: 'Ánh sáng', icon: 'light', color: 'text-amber-400', bg: 'bg-amber-400/10' },
     ],
   },
   {
-    id: 'motion-sound',
-    label: 'Kỹ xảo & Âm thanh',
+    id: 'design',
+    label: 'Thiết kế Canva',
     tools: [
-      { name: 'After Effects', icon: 'aftereffects', color: 'text-indigo-400', bg: 'bg-indigo-400/10' },
-      { name: 'Motion Graphics', icon: 'animation', color: 'text-pink-400', bg: 'bg-pink-400/10' },
-      { name: 'Audition', icon: 'audio', color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
-      { name: 'Sound Design', icon: 'sound', color: 'text-teal-400', bg: 'bg-teal-400/10' },
+      { name: 'Canva Pro', icon: 'design', color: 'text-sky-400', bg: 'bg-sky-400/10' },
+      { name: 'Thumbnail', icon: 'image', color: 'text-pink-400', bg: 'bg-pink-400/10' },
+      { name: 'Typography', icon: 'text', color: 'text-teal-400', bg: 'bg-teal-400/10' },
     ],
   },
 ]
@@ -143,27 +140,27 @@ export const traits = [
 
 export const skillGroups = [
   {
-    title: 'Công cụ Dựng Video',
+    title: 'Dựng Video & Edit',
     skills: [
-      { name: 'Premiere Pro', level: 95 },
-      { name: 'CapCut PC', level: 90 },
-      { name: 'DaVinci Resolve', level: 75 },
+      { name: 'CapCut (PC & Mobile)', level: 95 },
+      { name: 'Premiere Pro', level: 85 },
+      { name: 'Motion Graphics Cơ bản', level: 80 },
     ],
   },
   {
-    title: 'Kỹ xảo & Hoạt ảnh',
+    title: 'Thiết kế & Nội dung',
     skills: [
-      { name: 'After Effects', level: 85 },
-      { name: 'Motion Graphics', level: 80 },
-      { name: 'Typography', level: 85 },
+      { name: 'Thiết kế Canva', level: 90 },
+      { name: 'Lên Kịch bản (Scripting)', level: 85 },
+      { name: 'Storytelling', level: 90 },
     ],
   },
   {
-    title: 'Kỹ năng Chuyên môn',
+    title: 'Kỹ năng Quay & Âm thanh',
     skills: [
-      { name: 'Chỉnh màu (Color Grading)', level: 85 },
-      { name: 'Thiết kế âm thanh (Sound Design)', level: 80 },
-      { name: 'Kể chuyện (Storytelling)', level: 90 },
+      { name: 'Quay phim (Shooting)', level: 85 },
+      { name: 'Tìm nhạc & Ghép Sound Effect', level: 85 },
+      { name: 'Lồng tiếng (Voice-over)', level: 80 },
     ],
   },
 ]
