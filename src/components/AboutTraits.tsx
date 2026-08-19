@@ -1,9 +1,9 @@
-import { Code2, Lightbulb, Mic, Users } from 'lucide-react'
+import { Clapperboard, Aperture, Mic, Users } from 'lucide-react'
 import { traits } from '../data/content'
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  code: Code2,
-  lightbulb: Lightbulb,
+  clapperboard: Clapperboard,
+  aperture: Aperture,
   mic: Mic,
   users: Users,
 }

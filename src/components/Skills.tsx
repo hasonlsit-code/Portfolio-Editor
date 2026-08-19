@@ -1,6 +1,4 @@
 import {
-  ClipboardList,
-  CodeXml,
   Lightbulb,
   MessageSquare,
   Brain,
@@ -8,12 +6,8 @@ import {
   Clock,
   Zap,
   Mic,
-  PenTool,
-  Send,
-  LayoutGrid,
 } from 'lucide-react'
 import HeroPortrait from './HeroPortrait'
-import { GithubIcon } from './SocialIcons'
 import Reveal from './Reveal'
 
 function CapCutIcon({ size = 20, className }: { size?: number; className?: string }) {
@@ -25,49 +19,31 @@ function CapCutIcon({ size = 20, className }: { size?: number; className?: strin
   )
 }
 
-const businessAnalysis = [
-  { name: 'Requirement Elicitation', level: 90 },
-  { name: 'Process Modeling (BPMN, Flowchart)', level: 85 },
-  { name: 'Use Case & User Story', level: 90 },
-  { name: 'Market & Competitor Analysis', level: 85 },
-  { name: 'SQL & Data Analysis', level: 75 },
-  { name: 'Documentation (BRD, SRS, FRD)', level: 90 },
-]
-
-const frontendDev = [
-  { name: 'HTML / CSS / SCSS / Tailwind', level: 95 },
-  { name: 'JavaScript (ES6+)', level: 90 },
-  { name: 'React.js', level: 90 },
-  { name: 'Next.js', level: 75 },
-  { name: 'UI/UX & Responsive Design', level: 90 },
-  { name: 'State Management (Redux, Context)', level: 70 },
-]
-
 const videoEditor = [
-  { name: 'Video Editing', level: 95 },
-  { name: 'Transitions & Effects', level: 90 },
-  { name: 'Color Grading', level: 85 },
-  { name: 'Text & Animation', level: 90 },
-  { name: 'Audio Sync & Sound Design', level: 85 },
-  { name: 'Short-form (Reels, TikTok, Shorts)', level: 95 },
+  { name: 'Dựng Video (Video Editing)', level: 95 },
+  { name: 'Chuyển cảnh & Hiệu ứng', level: 90 },
+  { name: 'Chỉnh màu (Color Grading)', level: 85 },
+  { name: 'Hoạt ảnh chữ (Text & Animation)', level: 90 },
+  { name: 'Thiết kế âm thanh (Sound Design)', level: 85 },
+  { name: 'Video ngắn (Reels, TikTok, Shorts)', level: 95 },
 ]
 
 const contentCreator = [
-  { name: 'Content Strategy', level: 90 },
-  { name: 'Script Writing', level: 90 },
-  { name: 'Storytelling', level: 85 },
-  { name: 'Social Media (TikTok, YouTube, IG)', level: 90 },
-  { name: 'SEO & Hashtag Research', level: 80 },
-  { name: 'Engagement & Community', level: 85 },
+  { name: 'Chiến lược nội dung', level: 90 },
+  { name: 'Viết kịch bản', level: 90 },
+  { name: 'Kể chuyện (Storytelling)', level: 85 },
+  { name: 'Mạng xã hội (TikTok, YouTube)', level: 90 },
+  { name: 'Nghiên cứu xu hướng & Hashtag', level: 80 },
+  { name: 'Tương tác cộng đồng', level: 85 },
 ]
 
 const softSkills = [
-  { icon: MessageSquare, name: 'Communication', level: 90 },
-  { icon: Brain, name: 'Problem Solving', level: 90 },
-  { icon: Users, name: 'Teamwork', level: 90 },
-  { icon: Clock, name: 'Time Management', level: 85 },
-  { icon: Zap, name: 'Adaptability', level: 85 },
-  { icon: Mic, name: 'Presentation', level: 90 },
+  { icon: MessageSquare, name: 'Giao tiếp (Communication)', level: 90 },
+  { icon: Brain, name: 'Giải quyết vấn đề (Problem Solving)', level: 90 },
+  { icon: Users, name: 'Làm việc nhóm (Teamwork)', level: 90 },
+  { icon: Clock, name: 'Quản lý thời gian (Time Management)', level: 85 },
+  { icon: Zap, name: 'Khả năng thích ứng (Adaptability)', level: 85 },
+  { icon: Mic, name: 'Thuyết trình (Presentation)', level: 90 },
 ]
 
 const tools: {
@@ -76,16 +52,13 @@ const tools: {
   icon?: React.ComponentType<{ size?: number; className?: string }>
   letter?: string
 }[] = [
-  { name: 'Figma', icon: PenTool, bg: 'bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600' },
-  { name: 'VS Code', icon: CodeXml, bg: 'bg-blue-600' },
-  { name: 'Git / GitHub', icon: GithubIcon, bg: 'bg-neutral-800 border border-white/10' },
-  { name: 'Notion', letter: 'N', bg: 'bg-neutral-900 border border-white/10' },
-  { name: 'Postman', icon: Send, bg: 'bg-orange-500' },
-  { name: 'Trello', icon: LayoutGrid, bg: 'bg-blue-500' },
-  { name: 'Excel', letter: 'X', bg: 'bg-green-600' },
-  { name: 'PowerPoint', letter: 'P', bg: 'bg-orange-600' },
-  { name: 'Canva', letter: 'C', bg: 'bg-gradient-to-br from-cyan-400 to-purple-500' },
+  { name: 'Premiere Pro', letter: 'Pr', bg: 'bg-[#9999FF]' },
+  { name: 'After Effects', letter: 'Ae', bg: 'bg-[#9999FF]' },
+  { name: 'DaVinci', letter: 'Da', bg: 'bg-gradient-to-br from-gray-700 to-gray-900' },
   { name: 'CapCut', icon: CapCutIcon, bg: 'bg-neutral-900 border border-white/10' },
+  { name: 'Audition', letter: 'Au', bg: 'bg-[#00E676]' },
+  { name: 'Photoshop', letter: 'Ps', bg: 'bg-[#31A8FF]' },
+  { name: 'Illustrator', letter: 'Ai', bg: 'bg-[#FF9A00]' },
 ]
 
 const ProgressBar = ({ name, level }: { name: string; level: number }) => (
@@ -112,64 +85,28 @@ export default function Skills() {
       
       <Reveal className="relative z-10 max-w-3xl mb-16">
         <p className="text-sm font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-6">
-          WHAT I CAN DO <span className="ml-4 w-12 h-px bg-[var(--border-strong)] inline-block align-middle" />
+          TÔI CÓ THỂ LÀM GÌ <span className="ml-4 w-12 h-px bg-[var(--border-strong)] inline-block align-middle" />
         </p>
         <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-[var(--text)] mb-6 tracking-tight leading-tight">
-          Skills That Bring Ideas<br />to <span className="font-script text-sparkle">Life.</span>
+          Kỹ năng mang ý tưởng<br />vào <span className="font-script text-sparkle">Cuộc sống.</span>
         </h2>
         <p className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-xl">
-          A diverse skill set built through hands-on experience in business analysis, frontend development, video editing and content creation.
+          Bộ kỹ năng đa dạng được xây dựng thông qua kinh nghiệm thực tế trong việc dựng video, chỉnh màu, thiết kế âm thanh và sáng tạo nội dung.
         </p>
       </Reveal>
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 relative z-10">
-        
-        {/* Box 1: Business Analyst */}
-        <Reveal delay={0} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
-          <div className="flex items-start gap-4 mb-6">
-            <div className="w-12 h-12 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-soft)] flex items-center justify-center shrink-0">
-              <ClipboardList size={20} className="text-[var(--text)]" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text-[var(--text)] mb-2"><span className="text-[var(--text-faint)] font-normal mr-2">01</span> Business Analyst</h3>
-              <p className="text-[13px] text-[var(--text-muted)] leading-relaxed">
-                Analyze business needs, design solutions and bridge the gap between business goals and technology.
-              </p>
-            </div>
-          </div>
-          <div className="mt-auto pt-6">
-            {businessAnalysis.map(skill => <ProgressBar key={skill.name} {...skill} />)}
-          </div>
-        </Reveal>
-
-        {/* Box 2: Frontend Development */}
-        <Reveal delay={100} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
-          <div className="flex items-start gap-4 mb-6">
-            <div className="w-12 h-12 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-soft)] flex items-center justify-center shrink-0">
-              <CodeXml size={20} className="text-[var(--text)]" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text-[var(--text)] mb-2"><span className="text-[var(--text-faint)] font-normal mr-2">02</span> Frontend Development</h3>
-              <p className="text-[13px] text-[var(--text-muted)] leading-relaxed">
-                Build modern, responsive and user-friendly web interfaces with clean code and great user experience.
-              </p>
-            </div>
-          </div>
-          <div className="mt-auto pt-6">
-            {frontendDev.map(skill => <ProgressBar key={skill.name} {...skill} />)}
-          </div>
-        </Reveal>
+      <div className="grid lg:grid-cols-2 md:grid-cols-2 gap-6 relative z-10">
 
         {/* Box 3: Video Editor */}
-        <Reveal delay={200} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
+        <Reveal delay={0} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
           <div className="flex items-start gap-4 mb-6">
             <div className="w-12 h-12 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-soft)] flex items-center justify-center shrink-0">
               <CapCutIcon size={20} className="text-[var(--text)]" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[var(--text)] mb-2"><span className="text-[var(--text-faint)] font-normal mr-2">03</span> Video Editor (CapCut)</h3>
+              <h3 className="font-semibold text-lg text-[var(--text)] mb-2"><span className="text-[var(--text-faint)] font-normal mr-2">01</span> Video Editor</h3>
               <p className="text-[13px] text-[var(--text-muted)] leading-relaxed">
-                Create engaging short-form and long-form videos optimized for multiple platforms using CapCut.
+                Dựng video từ định dạng ngắn đến dài, tối ưu cho nhiều nền tảng với CapCut và Premiere.
               </p>
             </div>
           </div>
@@ -179,15 +116,15 @@ export default function Skills() {
         </Reveal>
 
         {/* Box 4: Content Creator */}
-        <Reveal delay={300} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
+        <Reveal delay={100} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
           <div className="flex items-start gap-4 mb-6">
             <div className="w-12 h-12 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-soft)] flex items-center justify-center shrink-0">
               <Lightbulb size={20} className="text-[var(--text)]" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[var(--text)] mb-2"><span className="text-[var(--text-faint)] font-normal mr-2">04</span> Content Creator</h3>
+              <h3 className="font-semibold text-lg text-[var(--text)] mb-2"><span className="text-[var(--text-faint)] font-normal mr-2">02</span> Sáng tạo nội dung</h3>
               <p className="text-[13px] text-[var(--text-muted)] leading-relaxed">
-                Develop ideas, create content and deliver value through videos, posts and stories.
+                Phát triển ý tưởng, tạo nội dung và mang lại giá trị qua video, bài đăng và câu chuyện.
               </p>
             </div>
           </div>
@@ -197,14 +134,14 @@ export default function Skills() {
         </Reveal>
 
         {/* Box 5: Tools & Technologies */}
-        <Reveal delay={400} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
+        <Reveal delay={200} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
           <div className="flex items-center justify-between mb-8">
             <h3 className="font-semibold text-lg text-[var(--text)] flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--text)]"></span>
-              Tools & Technologies
+              Công cụ & Phần mềm
             </h3>
             <button className="px-3 py-1.5 text-[11px] font-semibold tracking-wide border border-[var(--border-strong)] rounded-lg hover:bg-[var(--bg-soft)] transition-colors">
-              View All
+              Xem Tất Cả
             </button>
           </div>
           
@@ -228,10 +165,10 @@ export default function Skills() {
         </Reveal>
 
         {/* Box 6: Soft Skills */}
-        <Reveal delay={500} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
+        <Reveal delay={300} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
           <div className="flex items-center gap-2 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--text)]"></span>
-            <h3 className="font-semibold text-lg text-[var(--text)]">Soft Skills</h3>
+            <h3 className="font-semibold text-lg text-[var(--text)]">Kỹ năng Mềm</h3>
           </div>
           
           <div className="flex flex-col justify-between h-full gap-4">

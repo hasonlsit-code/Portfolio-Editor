@@ -1,12 +1,11 @@
-import { Code2, Folder, PlayCircle, Mic, Users } from 'lucide-react'
+import { Clapperboard, PlayCircle, Film, Users } from 'lucide-react'
 import { stats } from '../data/content'
 import Reveal from './Reveal'
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  code: Code2,
-  folder: Folder,
+  clapperboard: Clapperboard,
   'play-circle': PlayCircle,
-  mic: Mic,
+  film: Film,
   users: Users,
 }
 

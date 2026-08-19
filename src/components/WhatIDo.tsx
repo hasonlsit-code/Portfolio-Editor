@@ -1,12 +1,11 @@
-import { Code2, Rocket, Clapperboard, Lightbulb, Mic } from 'lucide-react'
+import { Clapperboard, Aperture, Film, Mic } from 'lucide-react'
 import { whatIDo } from '../data/content'
 import Reveal from './Reveal'
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  code: Code2,
-  rocket: Rocket,
   clapperboard: Clapperboard,
-  lightbulb: Lightbulb,
+  aperture: Aperture,
+  film: Film,
   mic: Mic,
 }
 
