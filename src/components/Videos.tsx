@@ -40,6 +40,28 @@ export default function Videos() {
     return url
   }
 
+  const getThumbnailUrl = (url: string) => {
+    if (!url) return null
+    if (url.includes('drive.google.com')) {
+      const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
+      if (match) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`
+      const idMatch = url.match(/id=([a-zA-Z0-9_-]+)/)
+      if (idMatch) return `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w800`
+      return null
+    }
+    if (url.includes('youtube.com/watch?v=')) {
+      try {
+        const videoId = new URL(url).searchParams.get('v')
+        return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+      } catch { return null }
+    }
+    if (url.includes('youtu.be/')) {
+      const videoId = url.split('youtu.be/')[1].split('?')[0]
+      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    }
+    return null
+  }
+
   const fetchVideos = async () => {
     if (!supabase) return
     const { data } = await supabase.from('videos').select('*').order('created_at', { ascending: false })
@@ -89,10 +111,10 @@ export default function Videos() {
           >
             <X size={24} />
           </button>
-          <div className="w-full max-w-5xl aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl animate-fade-up">
+          <div className="relative h-[85vh] aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-2xl animate-fade-up">
             <iframe
               src={getEmbedUrl(playingVideo)}
-              className="w-full h-full border-0"
+              className="absolute inset-0 w-full h-full border-0"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
             />
@@ -160,7 +182,7 @@ export default function Videos() {
         </form>
       )}
 
-      <div className="grid sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
 
         {dbVideos.map((video, i) => (
           <Reveal
@@ -179,10 +201,17 @@ export default function Videos() {
               onClick={() => {
                 if (video.video_url) setPlayingVideo(video.video_url)
               }}
-              className="relative aspect-video bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center overflow-hidden w-full text-left"
+              className="relative aspect-[9/16] bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden w-full text-left"
             >
-              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Play size={20} className="text-white fill-white ml-0.5" />
+              {getThumbnailUrl(video.video_url) && (
+                <img 
+                  src={getThumbnailUrl(video.video_url)!} 
+                  alt={video.title} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+                />
+              )}
+              <div className="relative z-10 w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-black/60 transition-all">
+                <Play size={18} className="text-white fill-white ml-0.5" />
               </div>
               {video.duration && (
                 <span className="absolute bottom-3 right-3 text-xs font-medium text-white/90 bg-black/30 px-2 py-0.5 rounded-full">
