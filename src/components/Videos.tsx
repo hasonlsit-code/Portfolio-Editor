@@ -50,7 +50,10 @@ export default function Videos() {
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!supabase) return
+    if (!supabase) {
+      alert("Bạn chưa cấu hình cơ sở dữ liệu Supabase! Vui lòng điền VITE_SUPABASE_URL và VITE_SUPABASE_ANON_KEY vào file .env để lưu video.")
+      return
+    }
     setSaving(true)
 
     let finalVideoUrl = form.video_url
@@ -110,7 +113,10 @@ export default function Videos() {
   }
 
   const handleDelete = async (id: string) => {
-    if (!supabase) return
+    if (!supabase) {
+      alert("Bạn chưa cấu hình cơ sở dữ liệu Supabase! Tính năng xóa đang bị vô hiệu hóa.")
+      return
+    }
     await supabase.from('videos').delete().eq('id', id)
     fetchVideos()
   }
