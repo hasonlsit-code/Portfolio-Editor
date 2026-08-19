@@ -11,20 +11,14 @@ export default function Reveal({ children, delay = 0, className = '' }: RevealPr
   const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
-    <div style={{ perspective: '1200px' }} className={className}>
-      <div
-        ref={ref}
-        className="transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-        style={{
-          opacity: inView ? 1 : 0,
-          transform: inView ? 'translateY(0) scale(1) rotateX(0)' : 'translateY(100px) scale(0.85) rotateX(30deg)',
-          filter: inView ? 'blur(0px)' : 'blur(10px)',
-          transitionDelay: `${delay}ms`,
-          transformOrigin: 'top center',
-        }}
-      >
-        {children}
-      </div>
+    <div
+      ref={ref}
+      className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        inView ? 'opacity-100 translate-y-0 scale-100 blur-none' : 'opacity-0 translate-y-12 scale-[0.95] blur-[4px]'
+      } ${className}`}
+      style={{ transitionDelay: inView ? `${delay}ms` : '0ms' }}
+    >
+      {children}
     </div>
   )
 }
