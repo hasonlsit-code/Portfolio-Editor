@@ -1,5 +1,5 @@
-import { Flag, ArrowRight } from 'lucide-react'
-import { journey, profile } from '../data/content'
+import { Flag } from 'lucide-react'
+import { journey } from '../data/content'
 
 export default function AboutJourney() {
   return (
@@ -11,14 +11,6 @@ export default function AboutJourney() {
           </span>
           My Journey
         </h3>
-        <a
-          href={profile.cvUrl}
-          download
-          className="flex items-center gap-1 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-colors shrink-0"
-        >
-          View Full Resume
-          <ArrowRight size={13} />
-        </a>
       </div>
 
       <div className="flex flex-col">
