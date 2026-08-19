@@ -13,9 +13,14 @@ export default function AboutPortrait() {
       <div className="absolute w-[240px] h-[240px] rounded-full border border-[var(--border-strong)] border-dashed animate-[spin_40s_linear_infinite]" />
       <div className="absolute w-[320px] h-[320px] rounded-full border border-[var(--border)] animate-[spin_50s_linear_infinite_reverse]" />
 
-      {/* Center 3D-like Icon */}
-      <div className="relative z-10 w-32 h-32 bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-soft)] backdrop-blur-md rounded-3xl border border-[var(--border-strong)] flex items-center justify-center shadow-2xl hover:scale-110 hover:rotate-3 transition-all duration-500 cursor-pointer">
-        <Clapperboard size={56} className="text-[var(--text)] drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
+      {/* Center 3D-like Icon with Continuous Animation */}
+      <div className="relative z-10 flex items-center justify-center animate-float">
+        <div className="absolute inset-0 bg-[var(--text)]/20 blur-2xl rounded-full animate-pulse" />
+        <Clapperboard 
+          size={100} 
+          className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] transition-all duration-300"
+          strokeWidth={1.5}
+        />
       </div>
     </div>
   )
