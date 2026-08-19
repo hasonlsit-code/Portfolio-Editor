@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Play, Plus, Trash2, X } from 'lucide-react'
 import { videos as staticVideos } from '../data/content'
 import { supabase } from '../lib/supabase'
-import { useAuth } from '../context/AuthContext'
 import Reveal from './Reveal'
 
 interface DbVideo {
@@ -14,13 +13,29 @@ interface DbVideo {
 }
 
 export default function Videos() {
-  const { isAdmin } = useAuth()
   const [dbVideos, setDbVideos] = useState<DbVideo[]>([])
   const [showForm, setShowForm] = useState(false)
   const [form, setForm] = useState({ title: '', video_url: '', category: '', duration: '' })
   const [saving, setSaving] = useState(false)
-  const [file, setFile] = useState<File | null>(null)
-  const [uploading, setUploading] = useState(false)
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null)
+
+  const getEmbedUrl = (url: string) => {
+    if (!url) return ''
+    if (url.includes('drive.google.com')) {
+      return url.replace(/\/view.*$/, '/preview')
+    }
+    if (url.includes('youtube.com/watch?v=')) {
+      try {
+        const videoId = new URL(url).searchParams.get('v')
+        return `https://www.youtube.com/embed/${videoId}`
+      } catch { return url }
+    }
+    if (url.includes('youtu.be/')) {
+      const videoId = url.split('youtu.be/')[1].split('?')[0]
+      return `https://www.youtube.com/embed/${videoId}`
+    }
+    return url
+  }
 
   const fetchVideos = async () => {
     if (!supabase) return
@@ -32,22 +47,6 @@ export default function Videos() {
     fetchVideos()
   }, [])
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
-    if (selectedFile) {
-      setFile(selectedFile)
-      
-      // Auto-fill title from filename
-      const fileNameWithoutExt = selectedFile.name.replace(/\.[^/.]+$/, "")
-      const title = fileNameWithoutExt
-        .split(/[-_]/)
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ')
-      
-      setForm(prev => ({ ...prev, title: prev.title || title }))
-    }
-  }
-
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!supabase) {
@@ -56,58 +55,14 @@ export default function Videos() {
     }
     setSaving(true)
 
-    let finalVideoUrl = form.video_url
-
-    if (file) {
-      setUploading(true)
-      try {
-        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
-        
-        if (!cloudName || !uploadPreset) {
-          alert("Cloudinary credentials are not configured in .env")
-          setUploading(false)
-          setSaving(false)
-          return
-        }
-
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('upload_preset', uploadPreset)
-
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
-          method: 'POST',
-          body: formData,
-        })
-        const data = await res.json()
-        if (data.secure_url) {
-          finalVideoUrl = data.secure_url
-        } else {
-          console.error("Cloudinary upload failed", data)
-          alert("Failed to upload video to Cloudinary.")
-          setUploading(false)
-          setSaving(false)
-          return
-        }
-      } catch (error) {
-        console.error("Error uploading to Cloudinary:", error)
-        alert("Error uploading video.")
-        setUploading(false)
-        setSaving(false)
-        return
-      }
-      setUploading(false)
-    }
-
     await supabase.from('videos').insert({
       title: form.title,
-      video_url: finalVideoUrl,
+      video_url: form.video_url,
       category: form.category || 'Video',
       duration: form.duration || null,
     })
     setSaving(false)
     setShowForm(false)
-    setFile(null)
     setForm({ title: '', video_url: '', category: '', duration: '' })
     fetchVideos()
   }
@@ -123,6 +78,25 @@ export default function Videos() {
 
   return (
     <section id="videos" className="px-6 sm:px-10 py-16 scroll-mt-6">
+      {playingVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-10 bg-black/90 backdrop-blur-sm">
+          <button 
+            onClick={() => setPlayingVideo(null)}
+            className="absolute top-5 right-5 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+          >
+            <X size={24} />
+          </button>
+          <div className="w-full max-w-5xl aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl animate-fade-up">
+            <iframe
+              src={getEmbedUrl(playingVideo)}
+              className="w-full h-full border-0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
+
       <Reveal>
         <div className="flex items-center justify-between gap-4 mb-3">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--text-faint)]">
@@ -147,29 +121,19 @@ export default function Videos() {
           onSubmit={handleAdd}
           className="grid sm:grid-cols-2 gap-3 mb-8 p-5 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]"
         >
-          <div className="sm:col-span-2 flex flex-col gap-2 p-4 rounded-xl border border-dashed border-[var(--border)] bg-[var(--bg-soft)]">
-            <p className="text-xs font-semibold text-[var(--text-faint)]">Tải Video Lên (Tùy chọn)</p>
-            <input
-              type="file"
-              accept="video/*"
-              onChange={handleFileChange}
-              className="text-sm text-[var(--text)] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[var(--text)] file:text-[var(--bg)] hover:file:opacity-90"
-            />
-          </div>
+          <input
+            required
+            placeholder="Link Video (Youtube hoặc Google Drive)"
+            value={form.video_url}
+            onChange={(e) => setForm({ ...form, video_url: e.target.value })}
+            className="sm:col-span-2 px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none"
+          />
           <input
             required
             placeholder="Tiêu đề"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none"
-          />
-          <input
-            required={!file}
-            placeholder="Link Video (Nếu không tải lên)"
-            value={form.video_url}
-            onChange={(e) => setForm({ ...form, video_url: e.target.value })}
-            className="px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none disabled:opacity-50"
-            disabled={!!file}
           />
           <input
             placeholder="Thể loại (VD: Dựng bằng Premiere)"
@@ -185,10 +149,10 @@ export default function Videos() {
           />
           <button
             type="submit"
-            disabled={saving || uploading}
+            disabled={saving}
             className="sm:col-span-2 py-2.5 rounded-xl bg-[var(--text)] text-[var(--bg)] font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {uploading ? 'Đang tải lên Cloudinary...' : saving ? 'Đang lưu...' : 'Lưu Video'}
+            {saving ? 'Đang lưu...' : 'Lưu Video'}
           </button>
         </form>
       )}
@@ -202,11 +166,18 @@ export default function Videos() {
           >
             <div className={`relative aspect-video bg-gradient-to-br ${video.accent} overflow-hidden`}>
               <div className="absolute inset-0 flex items-center justify-center">
-                <button className="w-14 h-14 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <button 
+                  onClick={() => {
+                    // Static videos might not have video_url in content.ts, but if they do, we play them
+                    if ((video as any).video_url) setPlayingVideo((video as any).video_url)
+                    else alert('Video mẫu này chưa có link đính kèm!')
+                  }}
+                  className="w-14 h-14 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center hover:scale-110 transition-transform"
+                >
                   <Play size={20} className="text-white fill-white ml-0.5" />
                 </button>
               </div>
-              <span className="absolute bottom-3 right-3 text-xs font-medium text-white/90 bg-black/30 px-2 py-0.5 rounded-full">
+              <span className="absolute bottom-3 right-3 text-xs font-medium text-white/90 bg-black/30 px-2 py-0.5 rounded-full pointer-events-none">
                 {video.duration}
               </span>
             </div>
@@ -230,21 +201,21 @@ export default function Videos() {
             >
               <Trash2 size={14} />
             </button>
-            <a
-              href={video.video_url}
-              target="_blank"
-              rel="noreferrer"
-              className="relative aspect-video bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center overflow-hidden"
+            <button
+              onClick={() => {
+                if (video.video_url) setPlayingVideo(video.video_url)
+              }}
+              className="relative aspect-video bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center overflow-hidden w-full text-left"
             >
-              <button className="w-14 h-14 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Play size={20} className="text-white fill-white ml-0.5" />
-              </button>
+              </div>
               {video.duration && (
                 <span className="absolute bottom-3 right-3 text-xs font-medium text-white/90 bg-black/30 px-2 py-0.5 rounded-full">
                   {video.duration}
                 </span>
               )}
-            </a>
+            </button>
             <div className="p-5">
               <h3 className="font-semibold text-[var(--text)] mb-1">{video.title}</h3>
               <p className="text-xs text-[var(--text-faint)]">{video.category}</p>
