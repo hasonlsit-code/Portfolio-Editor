@@ -1,53 +1,32 @@
 import { useState } from 'react'
 import {
   Calendar,
-  FileCode,
-  FileCode2,
-  Braces,
-  Atom,
-  Wind,
-  Hexagon,
-  PenTool,
   Clapperboard,
   Sparkles,
   Video,
   Palette,
   Volume2,
   Mic,
-  FileText,
-  CalendarDays,
-  Users,
   BookOpen,
-  Hash,
-  TrendingUp,
+  SplitSquareHorizontal,
+  Wand2,
+  Music,
 } from 'lucide-react'
-import { InstagramIcon, YoutubeIcon } from './SocialIcons'
 import { whatIDoTabs } from '../data/content'
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  html5: FileCode,
-  css3: FileCode2,
-  js: Braces,
-  react: Atom,
-  tailwind: Wind,
-  node: Hexagon,
-  figma: PenTool,
   premiere: Clapperboard,
   aftereffects: Sparkles,
   capcut: Video,
   davinci: Palette,
   color: Palette,
+  palette: Palette,
   audio: Volume2,
+  sound: Music,
   mic: Mic,
-  script: FileText,
-  stage: Mic,
-  event: CalendarDays,
-  audience: Users,
   story: BookOpen,
-  instagram: InstagramIcon,
-  youtube: YoutubeIcon,
-  seo: Hash,
-  analytics: TrendingUp,
+  transition: SplitSquareHorizontal,
+  animation: Wand2,
 }
 
 export default function AboutWhatIDo() {
@@ -60,10 +39,10 @@ export default function AboutWhatIDo() {
         <span className="w-9 h-9 rounded-xl bg-[var(--bg-soft)] flex items-center justify-center shrink-0">
           <Calendar size={16} />
         </span>
-        What I Do
+        Tôi Có Thể Làm Gì
       </h3>
       <p className="text-sm text-[var(--text-faint)] mb-6">
-        I blend creativity and technology to build digital products, tell stories and host experiences.
+        Tôi kết hợp sự sáng tạo và kỹ thuật để kể những câu chuyện và tạo ra các video chất lượng cao.
       </p>
 
       <div className="flex flex-wrap gap-2 mb-7">
