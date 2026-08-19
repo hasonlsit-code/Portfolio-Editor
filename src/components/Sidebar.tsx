@@ -3,10 +3,7 @@ import {
   Home,
   User,
   Box,
-  Folder,
   PlayCircle,
-  Mic,
-  FileText,
   Mail,
   Menu,
   X,
@@ -18,10 +15,7 @@ const icons: Record<string, React.ComponentType<{ size?: number; className?: str
   home: Home,
   user: User,
   box: Box,
-  folder: Folder,
   play: PlayCircle,
-  mic: Mic,
-  file: FileText,
   mail: Mail,
 }
 

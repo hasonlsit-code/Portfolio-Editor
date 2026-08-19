@@ -42,17 +42,17 @@ export default function Hero() {
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <button
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('videos')?.scrollIntoView({ behavior: 'smooth' })}
             className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--text)] text-[var(--bg)] font-semibold hover:scale-105 transition-transform"
           >
-            View My Work
+            Xem Tác Phẩm
             <ArrowRight size={16} />
           </button>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="flex items-center gap-2 px-7 py-3.5 rounded-full border border-[var(--border-strong)] text-[var(--text)] font-semibold hover:bg-[var(--bg-soft)] transition-colors"
           >
-            Contact Me
+            Liên Hệ
             <Send size={15} />
           </button>
         </div>
@@ -65,7 +65,7 @@ export default function Hero() {
             <span className="w-1 h-1 rounded-full bg-current" />
             <span className="w-px h-8 bg-[var(--border-strong)] group-hover:bg-current transition-colors" />
           </span>
-          Scroll Down
+          Cuộn Xuống
         </button>
       </div>
 
@@ -84,25 +84,25 @@ export default function Hero() {
       {/* About Me card — floats over the image on desktop, stacks on mobile */}
       <div className="lg:hidden px-6 sm:px-10 mt-6">
         <div className="glass-panel rounded-3xl p-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text)] mb-3">About Me</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--text)] mb-3">Về Tôi</p>
           <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-5">{profile.aboutShort}</p>
           <button
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             className="flex items-center gap-1.5 text-sm font-semibold text-[var(--text)] hover:text-[var(--text-muted)] transition-colors"
           >
-            Read More
+            Đọc Thêm
             <ArrowRight size={13} />
           </button>
         </div>
       </div>
       <div className="hidden lg:block absolute z-30 bottom-16 right-[10%] w-[300px] p-7 rounded-3xl glass-panel shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
-        <p className="text-xs font-bold uppercase tracking-widest text-[var(--text)] mb-3">About Me</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--text)] mb-3">Về Tôi</p>
         <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-6">{profile.aboutShort}</p>
         <button
           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
           className="flex items-center gap-1.5 text-sm font-semibold text-[var(--text)] hover:text-[var(--text-muted)] transition-colors"
         >
-          Read More
+          Đọc Thêm
           <ArrowRight size={13} />
         </button>
       </div>

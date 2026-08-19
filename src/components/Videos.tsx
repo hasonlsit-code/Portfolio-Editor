@@ -129,12 +129,12 @@ export default function Videos() {
               className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-[var(--text)] text-[var(--bg)] hover:opacity-90 transition-opacity"
             >
               {showForm ? <X size={13} /> : <Plus size={13} />}
-              {showForm ? 'Cancel' : 'Add Video'}
+              {showForm ? 'Hủy' : 'Thêm Video'}
             </button>
           )}
         </div>
         <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-10">
-          Stories I've edited
+          Những thước phim tôi đã dựng
         </h2>
       </Reveal>
 
@@ -144,7 +144,7 @@ export default function Videos() {
           className="grid sm:grid-cols-2 gap-3 mb-8 p-5 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]"
         >
           <div className="sm:col-span-2 flex flex-col gap-2 p-4 rounded-xl border border-dashed border-[var(--border)] bg-[var(--bg-soft)]">
-            <p className="text-xs font-semibold text-[var(--text-faint)]">Upload Video (Optional)</p>
+            <p className="text-xs font-semibold text-[var(--text-faint)]">Tải Video Lên (Tùy chọn)</p>
             <input
               type="file"
               accept="video/*"
@@ -154,27 +154,27 @@ export default function Videos() {
           </div>
           <input
             required
-            placeholder="Title"
+            placeholder="Tiêu đề"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none"
           />
           <input
             required={!file}
-            placeholder="Video link (If not uploading)"
+            placeholder="Link Video (Nếu không tải lên)"
             value={form.video_url}
             onChange={(e) => setForm({ ...form, video_url: e.target.value })}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none disabled:opacity-50"
             disabled={!!file}
           />
           <input
-            placeholder="Category (e.g. Edited in Premiere Pro)"
+            placeholder="Thể loại (VD: Dựng bằng Premiere)"
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none"
           />
           <input
-            placeholder="Duration (e.g. 02:45)"
+            placeholder="Thời lượng (VD: 02:45)"
             value={form.duration}
             onChange={(e) => setForm({ ...form, duration: e.target.value })}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none"
@@ -184,7 +184,7 @@ export default function Videos() {
             disabled={saving || uploading}
             className="sm:col-span-2 py-2.5 rounded-xl bg-[var(--text)] text-[var(--bg)] font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {uploading ? 'Uploading to Cloudinary...' : saving ? 'Saving…' : 'Save Video'}
+            {uploading ? 'Đang tải lên Cloudinary...' : saving ? 'Đang lưu...' : 'Lưu Video'}
           </button>
         </form>
       )}
