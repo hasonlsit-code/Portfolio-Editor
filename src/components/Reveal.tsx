@@ -13,8 +13,8 @@ export default function Reveal({ children, delay = 0, className = '' }: RevealPr
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        inView ? 'opacity-100 translate-y-0 scale-100 blur-none' : 'opacity-0 translate-y-12 scale-[0.95] blur-[4px]'
       } ${className}`}
       style={{ transitionDelay: inView ? `${delay}ms` : '0ms' }}
     >
