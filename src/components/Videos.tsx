@@ -123,22 +123,20 @@ export default function Videos() {
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--text)]" />
             Videos
           </p>
-          {isAdmin && (
-            <button
-              onClick={() => setShowForm((v) => !v)}
-              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-[var(--text)] text-[var(--bg)] hover:opacity-90 transition-opacity"
-            >
-              {showForm ? <X size={13} /> : <Plus size={13} />}
-              {showForm ? 'Hủy' : 'Thêm Video'}
-            </button>
-          )}
+          <button
+            onClick={() => setShowForm((v) => !v)}
+            className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-[var(--text)] text-[var(--bg)] hover:opacity-90 transition-opacity"
+          >
+            {showForm ? <X size={13} /> : <Plus size={13} />}
+            {showForm ? 'Hủy' : 'Thêm Video'}
+          </button>
         </div>
         <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-10">
           Những thước phim tôi đã dựng
         </h2>
       </Reveal>
 
-      {isAdmin && showForm && (
+      {showForm && (
         <form
           onSubmit={handleAdd}
           className="grid sm:grid-cols-2 gap-3 mb-8 p-5 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]"
@@ -219,15 +217,13 @@ export default function Videos() {
             delay={(staticVideos.length + i) * 100}
             className="group relative rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
           >
-            {isAdmin && (
-              <button
-                onClick={() => handleDelete(video.id)}
-                aria-label="Delete video"
-                className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
-              >
-                <Trash2 size={14} />
-              </button>
-            )}
+            <button
+              onClick={() => handleDelete(video.id)}
+              aria-label="Delete video"
+              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
+            >
+              <Trash2 size={14} />
+            </button>
             <a
               href={video.video_url}
               target="_blank"
