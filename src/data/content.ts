@@ -168,12 +168,7 @@ export const skillGroups = [
   },
 ]
 
-export const videos = [
-  { title: 'Video Du Lịch Điện Ảnh', category: 'Dựng bằng Premiere Pro', duration: '02:45', accent: 'from-slate-700 to-slate-900' },
-  { title: 'Video Promo Thương Hiệu', category: 'Dựng bằng After Effects', duration: '01:30', accent: 'from-violet-600 to-purple-800' },
-  { title: 'Highlight Đám Cưới', category: 'Dựng bằng Premiere Pro', duration: '03:12', accent: 'from-rose-500 to-red-700' },
-  { title: 'Teaser Ra Mắt Sản Phẩm', category: 'Motion Graphics', duration: '00:45', accent: 'from-cyan-500 to-blue-700' },
-]
+export const videos = []
 
 export const projects = []
 export const mcEvents = []

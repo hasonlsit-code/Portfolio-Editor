@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Play, Plus, Trash2, X } from 'lucide-react'
-import { videos as staticVideos } from '../data/content'
 import { supabase } from '../lib/supabase'
 import Reveal from './Reveal'
 
@@ -22,7 +21,11 @@ export default function Videos() {
   const getEmbedUrl = (url: string) => {
     if (!url) return ''
     if (url.includes('drive.google.com')) {
-      return url.replace(/\/view.*$/, '/preview')
+      const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
+      if (match) return `https://drive.google.com/file/d/${match[1]}/preview`
+      const idMatch = url.match(/id=([a-zA-Z0-9_-]+)/)
+      if (idMatch) return `https://drive.google.com/file/d/${idMatch[1]}/preview`
+      return url
     }
     if (url.includes('youtube.com/watch?v=')) {
       try {
@@ -158,40 +161,11 @@ export default function Videos() {
       )}
 
       <div className="grid sm:grid-cols-2 gap-6">
-        {staticVideos.map((video, i) => (
-          <Reveal
-            key={video.title}
-            delay={i * 100}
-            className="group rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
-          >
-            <div className={`relative aspect-video bg-gradient-to-br ${video.accent} overflow-hidden`}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button 
-                  onClick={() => {
-                    // Static videos might not have video_url in content.ts, but if they do, we play them
-                    if ((video as any).video_url) setPlayingVideo((video as any).video_url)
-                    else alert('Video mẫu này chưa có link đính kèm!')
-                  }}
-                  className="w-14 h-14 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center hover:scale-110 transition-transform"
-                >
-                  <Play size={20} className="text-white fill-white ml-0.5" />
-                </button>
-              </div>
-              <span className="absolute bottom-3 right-3 text-xs font-medium text-white/90 bg-black/30 px-2 py-0.5 rounded-full pointer-events-none">
-                {video.duration}
-              </span>
-            </div>
-            <div className="p-5">
-              <h3 className="font-semibold text-[var(--text)] mb-1">{video.title}</h3>
-              <p className="text-xs text-[var(--text-faint)]">{video.category}</p>
-            </div>
-          </Reveal>
-        ))}
 
         {dbVideos.map((video, i) => (
           <Reveal
             key={video.id}
-            delay={(staticVideos.length + i) * 100}
+            delay={i * 100}
             className="group relative rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
           >
             <button
