@@ -1,12 +1,4 @@
-import {
-  Lightbulb,
-  MessageSquare,
-  Brain,
-  Users,
-  Clock,
-  Zap,
-  Mic,
-} from 'lucide-react'
+import { Lightbulb } from 'lucide-react'
 import HeroPortrait from './HeroPortrait'
 import Reveal from './Reveal'
 
@@ -37,29 +29,6 @@ const contentCreator = [
   { name: 'Tương tác cộng đồng', level: 85 },
 ]
 
-const softSkills = [
-  { icon: MessageSquare, name: 'Giao tiếp (Communication)', level: 90 },
-  { icon: Brain, name: 'Giải quyết vấn đề (Problem Solving)', level: 90 },
-  { icon: Users, name: 'Làm việc nhóm (Teamwork)', level: 90 },
-  { icon: Clock, name: 'Quản lý thời gian (Time Management)', level: 85 },
-  { icon: Zap, name: 'Khả năng thích ứng (Adaptability)', level: 85 },
-  { icon: Mic, name: 'Thuyết trình (Presentation)', level: 90 },
-]
-
-const tools: {
-  name: string
-  bg: string
-  icon?: React.ComponentType<{ size?: number; className?: string }>
-  letter?: string
-}[] = [
-  { name: 'Premiere Pro', letter: 'Pr', bg: 'bg-[#9999FF]' },
-  { name: 'After Effects', letter: 'Ae', bg: 'bg-[#9999FF]' },
-  { name: 'DaVinci', letter: 'Da', bg: 'bg-gradient-to-br from-gray-700 to-gray-900' },
-  { name: 'CapCut', icon: CapCutIcon, bg: 'bg-neutral-900 border border-white/10' },
-  { name: 'Audition', letter: 'Au', bg: 'bg-[#00E676]' },
-  { name: 'Photoshop', letter: 'Ps', bg: 'bg-[#31A8FF]' },
-  { name: 'Illustrator', letter: 'Ai', bg: 'bg-[#FF9A00]' },
-]
 
 const ProgressBar = ({ name, level }: { name: string; level: number }) => (
   <div className="mb-4 last:mb-0">
@@ -133,67 +102,6 @@ export default function Skills() {
           </div>
         </Reveal>
 
-        {/* Box 5: Tools & Technologies */}
-        <Reveal delay={200} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="font-semibold text-lg text-[var(--text)] flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--text)]"></span>
-              Công cụ & Phần mềm
-            </h3>
-            <button className="px-3 py-1.5 text-[11px] font-semibold tracking-wide border border-[var(--border-strong)] rounded-lg hover:bg-[var(--bg-soft)] transition-colors">
-              Xem Tất Cả
-            </button>
-          </div>
-          
-          <div className="grid grid-cols-5 gap-y-6 gap-x-2 mt-auto">
-            {tools.map((tool) => {
-              const Icon = tool.icon
-              return (
-                <div key={tool.name} className="group flex flex-col items-center gap-2">
-                  <div className={`w-12 h-12 rounded-2xl ${tool.bg} flex items-center justify-center shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5`}>
-                    {Icon ? <Icon size={20} className="text-white" /> : (
-                      <span className="text-white font-bold text-base">{tool.letter}</span>
-                    )}
-                  </div>
-                  <span className="text-[10px] text-[var(--text-muted)] text-center w-full truncate px-1">
-                    {tool.name}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
-        </Reveal>
-
-        {/* Box 6: Soft Skills */}
-        <Reveal delay={300} className="glass-panel rounded-2xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
-          <div className="flex items-center gap-2 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--text)]"></span>
-            <h3 className="font-semibold text-lg text-[var(--text)]">Kỹ năng Mềm</h3>
-          </div>
-          
-          <div className="flex flex-col justify-between h-full gap-4">
-            {softSkills.map((skill) => {
-              const Icon = skill.icon
-              return (
-                <div key={skill.name} className="flex items-center gap-4">
-                  <Icon size={16} className="text-[var(--text-muted)] shrink-0" />
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[13px] font-medium text-[var(--text-muted)]">{skill.name}</span>
-                      <span className="text-[13px] font-medium text-[var(--text)]">{skill.level}%</span>
-                    </div>
-                    <div className="h-1.5 w-full rounded-full bg-[var(--border-strong)] overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-[var(--text)]"
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </Reveal>
 
       </div>
     </section>

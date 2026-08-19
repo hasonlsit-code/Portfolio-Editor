@@ -18,8 +18,8 @@ export const profile = {
   phone: '098 4614 762',
   cvUrl: '#',
   social: {
-    facebook: 'https://facebook.com/',
-    instagram: 'https://instagram.com/',
+    facebook: 'https://www.facebook.com/shinne13/',
+    instagram: 'https://www.instagram.com/tolason204/',
   },
 }
 
