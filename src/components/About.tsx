@@ -13,26 +13,25 @@ export default function About() {
     <section id="about" className="px-6 sm:px-10 py-16 lg:pt-10 scroll-mt-6">
       <Reveal>
         <p className="flex items-center gap-2 text-sm font-medium text-[var(--text-muted)] mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--text)]" />
-          About Me
+          Về Tôi
         </p>
       </Reveal>
 
       <div className="grid lg:grid-cols-[1fr_1.3fr] gap-10 items-center mb-14">
         <Reveal>
-          <p className="flex items-center gap-3 text-[var(--text-muted)] text-sm font-medium mb-4">
-            Get to know me
+            <p className="flex items-center gap-3 text-[var(--text-muted)] text-sm font-medium mb-4">
+            Tìm hiểu về tôi
             <span className="w-10 h-px bg-[var(--border-strong)]" />
           </p>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-[var(--text)] mb-6 leading-[1.15] tracking-tight">
-            I turn ideas into
+            Tôi biến ý tưởng thành
             <br />
-            real{' '}
+            những{' '}
             <span
               className="font-script italic"
               style={{ textDecorationLine: 'underline', textDecorationStyle: 'wavy', textUnderlineOffset: '8px', textDecorationColor: 'var(--text-faint)' }}
             >
-              experiences.
+              trải nghiệm thực tế.
             </span>
           </h2>
           <p className="text-[var(--text-muted)] text-base leading-relaxed max-w-md mb-10">

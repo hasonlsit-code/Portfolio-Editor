@@ -127,7 +127,7 @@ export default function Sidebar() {
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-[var(--text)] mb-4">Let's Connect</p>
+          <p className="text-sm font-semibold text-[var(--text)] mb-4">Kết nối với tôi</p>
           <div id="social" className="flex items-center gap-3 mb-3">
             <a href={profile.social.github} target="_blank" rel="noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--bg-soft)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
               <GithubIcon size={16} />
@@ -152,7 +152,7 @@ export default function Sidebar() {
           <p className="text-xs text-[var(--text-faint)] leading-relaxed mb-6">
             © 2026 {profile.name}
             <br />
-            All rights reserved.
+            Mọi quyền được bảo lưu.
           </p>
         </div>
       </aside>

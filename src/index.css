@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
-  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --font-sans: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
   --font-script: "Playfair Display", serif;
 }
 
 :root {
-  --bg: #f7f7f8;
-  --bg-elevated: #ffffff;
-  --bg-card: rgba(10, 10, 15, 0.03);
-  --bg-soft: rgba(10, 10, 15, 0.05);
-  --text: #0a0a0d;
-  --text-muted: #52525b;
-  --text-faint: #8b8b95;
-  --border: rgba(10, 10, 15, 0.08);
-  --border-strong: rgba(10, 10, 15, 0.14);
-  --accent: #0a0a0d;
-  --accent-contrast: #ffffff;
-  --shadow-soft: 0 10px 30px -10px rgba(10, 10, 15, 0.12);
-  --glass-border: rgba(10, 10, 15, 0.08);
+  --bg: #030305;
+  --bg-elevated: #08080a;
+  --bg-card: rgba(255, 255, 255, 0.02);
+  --bg-soft: rgba(255, 255, 255, 0.05);
+  --text: #ffffff;
+  --text-muted: #9ca3af;
+  --text-faint: #6b7280;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --accent: #ffffff;
+  --accent-contrast: #030305;
+  --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 .dark {
