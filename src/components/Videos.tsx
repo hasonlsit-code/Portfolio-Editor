@@ -14,9 +14,9 @@ interface DbVideo {
 export default function Videos() {
   const [dbVideos, setDbVideos] = useState<DbVideo[]>([])
   const [showForm, setShowForm] = useState(false)
-  const [form, setForm] = useState({ title: '', video_url: '', category: '', duration: '' })
+  const [form, setForm] = useState({ title: '', video_url: '', category: '', duration: '', orientation: 'vertical' })
   const [saving, setSaving] = useState(false)
-  const [playingVideo, setPlayingVideo] = useState<string | null>(null)
+  const [playingVideo, setPlayingVideo] = useState<{url: string, orientation: 'vertical'|'horizontal'} | null>(null)
 
   const getEmbedUrl = (url: string) => {
     if (!url) return ''
@@ -83,12 +83,12 @@ export default function Videos() {
     await supabase.from('videos').insert({
       title: form.title,
       video_url: form.video_url,
-      category: form.category || 'Video',
+      category: `${form.category || 'Video'} #${form.orientation}`,
       duration: form.duration || null,
     })
     setSaving(false)
     setShowForm(false)
-    setForm({ title: '', video_url: '', category: '', duration: '' })
+    setForm({ title: '', video_url: '', category: '', duration: '', orientation: 'vertical' })
     fetchVideos()
   }
 
@@ -101,6 +101,11 @@ export default function Videos() {
     fetchVideos()
   }
 
+  const verticalVideos = dbVideos.filter(v => !v.category.includes('#horizontal'))
+  const horizontalVideos = dbVideos.filter(v => v.category.includes('#horizontal'))
+
+  const cleanCategory = (cat: string) => cat.replace('#vertical', '').replace('#horizontal', '').trim()
+
   return (
     <section id="videos" className="px-6 sm:px-10 py-16 scroll-mt-6">
       {playingVideo && (
@@ -111,9 +116,9 @@ export default function Videos() {
           >
             <X size={24} />
           </button>
-          <div className="relative h-[85vh] aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-2xl animate-fade-up">
+          <div className={`relative ${playingVideo.orientation === 'horizontal' ? 'w-full max-w-5xl aspect-video' : 'h-[85vh] aspect-[9/16]'} rounded-2xl overflow-hidden bg-black shadow-2xl animate-fade-up`}>
             <iframe
-              src={getEmbedUrl(playingVideo)}
+              src={getEmbedUrl(playingVideo.url)}
               className="absolute inset-0 w-full h-full border-0"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
@@ -172,6 +177,29 @@ export default function Videos() {
             onChange={(e) => setForm({ ...form, duration: e.target.value })}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-soft)] border border-[var(--border)] text-[var(--text)] text-sm outline-none"
           />
+          <div className="sm:col-span-2 flex items-center gap-4 px-1">
+            <span className="text-sm font-semibold text-[var(--text)]">Định dạng:</span>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input 
+                type="radio" 
+                name="orientation" 
+                checked={form.orientation === 'vertical'}
+                onChange={() => setForm({ ...form, orientation: 'vertical' })}
+                className="accent-[var(--text)]"
+              />
+              <span className="text-sm text-[var(--text-faint)]">Dọc (9:16)</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input 
+                type="radio" 
+                name="orientation" 
+                checked={form.orientation === 'horizontal'}
+                onChange={() => setForm({ ...form, orientation: 'horizontal' })}
+                className="accent-[var(--text)]"
+              />
+              <span className="text-sm text-[var(--text-faint)]">Ngang (16:9)</span>
+            </label>
+          </div>
           <button
             type="submit"
             disabled={saving}
@@ -182,50 +210,109 @@ export default function Videos() {
         </form>
       )}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      {verticalVideos.length > 0 && (
+        <div className="mb-12">
+          <h3 className="text-xl font-bold text-[var(--text)] mb-6 flex items-center gap-2">
+            <span className="w-1.5 h-6 rounded-full bg-indigo-500" />
+            Video Dọc (Shorts, Reels)
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {verticalVideos.map((video, i) => (
+              <Reveal
+                key={video.id}
+                delay={i * 100}
+                className="group relative rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
+              >
+                <button
+                  onClick={() => handleDelete(video.id)}
+                  aria-label="Delete video"
+                  className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
+                >
+                  <Trash2 size={14} />
+                </button>
+                <button
+                  onClick={() => {
+                    if (video.video_url) setPlayingVideo({ url: video.video_url, orientation: 'vertical' })
+                  }}
+                  className="relative aspect-[9/16] bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden w-full text-left"
+                >
+                  {getThumbnailUrl(video.video_url) && (
+                    <img 
+                      src={getThumbnailUrl(video.video_url)!} 
+                      alt={video.title} 
+                      className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+                    />
+                  )}
+                  <div className="relative z-10 w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-black/60 transition-all">
+                    <Play size={18} className="text-white fill-white ml-0.5" />
+                  </div>
+                  {video.duration && (
+                    <span className="absolute bottom-3 right-3 z-10 text-xs font-medium text-white/90 bg-black/50 backdrop-blur px-2 py-0.5 rounded-full">
+                      {video.duration}
+                    </span>
+                  )}
+                </button>
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-semibold text-[var(--text)] mb-1 line-clamp-1">{video.title}</h3>
+                  <p className="text-xs text-[var(--text-faint)] line-clamp-1">{cleanCategory(video.category)}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      )}
 
-        {dbVideos.map((video, i) => (
-          <Reveal
-            key={video.id}
-            delay={i * 100}
-            className="group relative rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
-          >
-            <button
-              onClick={() => handleDelete(video.id)}
-              aria-label="Delete video"
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
-            >
-              <Trash2 size={14} />
-            </button>
-            <button
-              onClick={() => {
-                if (video.video_url) setPlayingVideo(video.video_url)
-              }}
-              className="relative aspect-[9/16] bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden w-full text-left"
-            >
-              {getThumbnailUrl(video.video_url) && (
-                <img 
-                  src={getThumbnailUrl(video.video_url)!} 
-                  alt={video.title} 
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
-                />
-              )}
-              <div className="relative z-10 w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-black/60 transition-all">
-                <Play size={18} className="text-white fill-white ml-0.5" />
-              </div>
-              {video.duration && (
-                <span className="absolute bottom-3 right-3 text-xs font-medium text-white/90 bg-black/30 px-2 py-0.5 rounded-full">
-                  {video.duration}
-                </span>
-              )}
-            </button>
-            <div className="p-5">
-              <h3 className="font-semibold text-[var(--text)] mb-1">{video.title}</h3>
-              <p className="text-xs text-[var(--text-faint)]">{video.category}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
+      {horizontalVideos.length > 0 && (
+        <div>
+          <h3 className="text-xl font-bold text-[var(--text)] mb-6 flex items-center gap-2">
+            <span className="w-1.5 h-6 rounded-full bg-rose-500" />
+            Video Ngang (Youtube, Phim)
+          </h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {horizontalVideos.map((video, i) => (
+              <Reveal
+                key={video.id}
+                delay={i * 100}
+                className="group relative rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
+              >
+                <button
+                  onClick={() => handleDelete(video.id)}
+                  aria-label="Delete video"
+                  className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
+                >
+                  <Trash2 size={14} />
+                </button>
+                <button
+                  onClick={() => {
+                    if (video.video_url) setPlayingVideo({ url: video.video_url, orientation: 'horizontal' })
+                  }}
+                  className="relative aspect-video bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden w-full text-left"
+                >
+                  {getThumbnailUrl(video.video_url) && (
+                    <img 
+                      src={getThumbnailUrl(video.video_url)!} 
+                      alt={video.title} 
+                      className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+                    />
+                  )}
+                  <div className="relative z-10 w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-black/60 transition-all">
+                    <Play size={18} className="text-white fill-white ml-0.5" />
+                  </div>
+                  {video.duration && (
+                    <span className="absolute bottom-3 right-3 z-10 text-xs font-medium text-white/90 bg-black/50 backdrop-blur px-2 py-0.5 rounded-full">
+                      {video.duration}
+                    </span>
+                  )}
+                </button>
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-semibold text-[var(--text)] mb-1 line-clamp-1">{video.title}</h3>
+                  <p className="text-xs text-[var(--text-faint)] line-clamp-1">{cleanCategory(video.category)}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
