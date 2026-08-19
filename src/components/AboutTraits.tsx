@@ -1,4 +1,4 @@
-import { Clapperboard, Aperture, Mic, Users } from 'lucide-react'
+import { Clapperboard, Aperture, Mic, Users, Zap } from 'lucide-react'
 import { traits } from '../data/content'
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -6,6 +6,7 @@ const icons: Record<string, React.ComponentType<{ size?: number; className?: str
   aperture: Aperture,
   mic: Mic,
   users: Users,
+  zap: Zap,
 }
 
 export default function AboutTraits() {
