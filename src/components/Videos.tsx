@@ -18,6 +18,9 @@ export default function Videos() {
   const [saving, setSaving] = useState(false)
   const [playingVideo, setPlayingVideo] = useState<{url: string, orientation: 'vertical'|'horizontal'} | null>(null)
 
+  // Use URL parameter ?admin=true to show admin controls
+  const isAdmin = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('admin') === 'true'
+
   const getEmbedUrl = (url: string) => {
     if (!url) return ''
     if (url.includes('drive.google.com')) {
@@ -133,13 +136,15 @@ export default function Videos() {
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--text)]" />
             Videos
           </p>
-          <button
-            onClick={() => setShowForm((v) => !v)}
-            className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-[var(--text)] text-[var(--bg)] hover:opacity-90 transition-opacity"
-          >
-            {showForm ? <X size={13} /> : <Plus size={13} />}
-            {showForm ? 'Hủy' : 'Thêm Video'}
-          </button>
+          {isAdmin && (
+            <button
+              onClick={() => setShowForm((v) => !v)}
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-[var(--text)] text-[var(--bg)] hover:opacity-90 transition-opacity"
+            >
+              {showForm ? <X size={13} /> : <Plus size={13} />}
+              {showForm ? 'Hủy' : 'Thêm Video'}
+            </button>
+          )}
         </div>
         <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[var(--text)] mb-10">
           Những thước phim tôi đã dựng
@@ -223,13 +228,15 @@ export default function Videos() {
                 delay={i * 100}
                 className="group relative rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
               >
-                <button
-                  onClick={() => handleDelete(video.id)}
-                  aria-label="Delete video"
-                  className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
-                >
-                  <Trash2 size={14} />
-                </button>
+                {isAdmin && (
+                  <button
+                    onClick={() => handleDelete(video.id)}
+                    aria-label="Delete video"
+                    className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                )}
                 <button
                   onClick={() => {
                     if (video.video_url) setPlayingVideo({ url: video.video_url, orientation: 'vertical' })
@@ -275,13 +282,15 @@ export default function Videos() {
                 delay={i * 100}
                 className="group relative rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] overflow-hidden hover:shadow-[var(--shadow-soft)] hover:-translate-y-1 transition-all duration-300"
               >
-                <button
-                  onClick={() => handleDelete(video.id)}
-                  aria-label="Delete video"
-                  className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
-                >
-                  <Trash2 size={14} />
-                </button>
+                {isAdmin && (
+                  <button
+                    onClick={() => handleDelete(video.id)}
+                    aria-label="Delete video"
+                    className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 backdrop-blur text-white/80 hover:text-white flex items-center justify-center"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                )}
                 <button
                   onClick={() => {
                     if (video.video_url) setPlayingVideo({ url: video.video_url, orientation: 'horizontal' })
