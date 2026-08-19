@@ -63,78 +63,73 @@ export const stats = [
 
 export const journey = [
   {
-    year: '2022',
-    title: 'Bắt đầu hành trình',
-    description: 'Tiếp xúc với các phần mềm dựng phim cơ bản và đam mê nghệ thuật kể chuyện bằng hình ảnh.',
-  },
-  {
     year: '2023',
-    title: 'Phát triển Kỹ năng',
-    description: 'Nghiên cứu sâu về Premiere Pro và After Effects, thực hiện các dự án video du lịch và sự kiện nhỏ.',
+    title: 'Bắt đầu hành trình',
+    description: 'Tự tay quay những thước phim đầu tiên và làm quen với tư duy kể chuyện qua khung hình.',
   },
   {
     year: '2024',
-    title: 'Nâng tầm Điện ảnh',
-    description: 'Tập trung vào Color Grading và Sound Design, mang đến chất lượng điện ảnh cho các video thương hiệu.',
+    title: 'Phát triển Kỹ năng',
+    description: 'Làm chủ CapCut để edit tốc độ cao và ứng dụng Canva vào việc thiết kế hình ảnh, Thumbnail.',
   },
   {
     year: 'Hiện tại',
-    title: 'Sáng tạo không ngừng',
-    description: 'Tiếp tục học hỏi, sáng tạo và mang lại giá trị cảm xúc qua những thước phim chuyên nghiệp.',
+    title: 'Sáng tạo trọn gói',
+    description: 'Nhận quay dựng trọn gói: từ khâu lên ý tưởng, viết kịch bản, bấm máy đến hậu kỳ hoàn thiện.',
   },
 ]
 
-export const whatIDoTabs = [
+export const coreTools = [
   {
-    id: 'video-editing',
-    label: 'Dựng Video',
-    tools: [
-      { name: 'CapCut', icon: 'capcut', color: 'text-slate-200', bg: 'bg-slate-400/10' },
-      { name: 'Premiere Pro', icon: 'premiere', color: 'text-purple-400', bg: 'bg-purple-400/10' },
-      { name: 'Hiệu ứng chuyển cảnh', icon: 'transition', color: 'text-indigo-400', bg: 'bg-indigo-400/10' },
-      { name: 'Tìm nhạc (BGM)', icon: 'audio', color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
-    ],
+    name: 'CapCut (PC/Mobile)',
+    description: 'Công cụ đắc lực để cắt ghép, chèn hiệu ứng, âm thanh và xuất bản video siêu tốc.',
+    icon: 'video',
+    color: 'text-sky-400',
+    bg: 'bg-sky-400/10'
   },
   {
-    id: 'script-shoot',
-    label: 'Kịch bản & Quay',
-    tools: [
-      { name: 'Lên Kịch Bản', icon: 'story', color: 'text-violet-400', bg: 'bg-violet-400/10' },
-      { name: 'Quay Phim', icon: 'camera', color: 'text-rose-400', bg: 'bg-rose-400/10' },
-      { name: 'Ánh sáng', icon: 'light', color: 'text-amber-400', bg: 'bg-amber-400/10' },
-    ],
+    name: 'Canva Pro',
+    description: 'Thiết kế thumbnail, banner, và các ấn phẩm mạng xã hội cực kỳ đẹp mắt, đồng bộ.',
+    icon: 'palette',
+    color: 'text-purple-400',
+    bg: 'bg-purple-400/10'
   },
   {
-    id: 'design',
-    label: 'Thiết kế Canva',
-    tools: [
-      { name: 'Canva Pro', icon: 'design', color: 'text-sky-400', bg: 'bg-sky-400/10' },
-      { name: 'Thumbnail', icon: 'image', color: 'text-pink-400', bg: 'bg-pink-400/10' },
-      { name: 'Typography', icon: 'text', color: 'text-teal-400', bg: 'bg-teal-400/10' },
-    ],
+    name: 'Lên Kịch Bản',
+    description: 'Xây dựng đường dây câu chuyện, lời thoại và ý tưởng chi tiết trước khi bấm máy.',
+    icon: 'book',
+    color: 'text-amber-400',
+    bg: 'bg-amber-400/10'
   },
+  {
+    name: 'Quay Phim',
+    description: 'Trực tiếp set up góc máy, ánh sáng và ghi lại những thước phim chất lượng cao.',
+    icon: 'camera',
+    color: 'text-rose-400',
+    bg: 'bg-rose-400/10'
+  }
 ]
 
 export const traits = [
   {
     icon: 'clapperboard',
     title: 'Kể chuyện bằng hình ảnh',
-    description: 'Mỗi video là một câu chuyện. Tôi tập trung vào cảm xúc và thông điệp.',
+    description: 'Mỗi video là một câu chuyện. Tôi tập trung vào việc dẫn dắt cảm xúc người xem.',
+  },
+  {
+    icon: 'zap',
+    title: 'Tốc độ & Hiệu quả',
+    description: 'Sử dụng CapCut giúp tối ưu hóa thời gian hậu kỳ mà vẫn đảm bảo chất lượng cao.',
   },
   {
     icon: 'aperture',
-    title: 'Màu sắc điện ảnh',
-    description: 'Đảm bảo mỗi khung hình đều có chiều sâu và màu sắc phù hợp với tâm trạng.',
+    title: 'Thẩm mỹ đồng bộ',
+    description: 'Kết hợp Canva để tạo ra các thumbnail và bao bì sản phẩm đẹp mắt, chuyên nghiệp.',
   },
   {
     icon: 'mic',
     title: 'Âm thanh sống động',
-    description: 'Âm thanh chiếm 50% trải nghiệm xem. Tôi luôn chú trọng thiết kế âm thanh.',
-  },
-  {
-    icon: 'users',
-    title: 'Làm việc chuyên nghiệp',
-    description: 'Giao sản phẩm đúng hạn, lắng nghe phản hồi và luôn cải thiện chất lượng.',
+    description: 'Âm thanh chiếm 50% trải nghiệm. Tôi luôn chú trọng thiết kế và mix âm thanh.',
   },
 ]
 
@@ -143,8 +138,8 @@ export const skillGroups = [
     title: 'Dựng Video & Edit',
     skills: [
       { name: 'CapCut (PC & Mobile)', level: 95 },
-      { name: 'Premiere Pro', level: 85 },
-      { name: 'Motion Graphics Cơ bản', level: 80 },
+      { name: 'Hiệu ứng chuyển cảnh', level: 85 },
+      { name: 'Chỉnh màu cơ bản', level: 80 },
     ],
   },
   {
